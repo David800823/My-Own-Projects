@@ -2,7 +2,7 @@
 title: "Titanic Survival Rate"
 author: "David Sierra Perez"
 date: "`r Sys.Date()`"
-
+output: word_document
 ---
 
 
@@ -86,6 +86,19 @@ skim_without_charts(cleaned_train)
 cleaned_train <- cleaned_train %>% 
   drop_na()
 ```
+
+
+Before we can do further analysis, we need to convert Sex into a boolean variable. To do this i am choosing to name the following genders with the following number.
+ * Male = 1
+ * Female = 0
+
+```{R clean2}
+cleaned_train$Sex[cleaned_train$Sex == "male"] <- 1      
+cleaned_train$Sex[cleaned_train$Sex == "female"] <- 0  
+
+head(cleaned_train)
+```
+
 ### **Now we will do a quick analysis of our data**
 The first step of our analysis was to get a general count of Sex, Passenger Class, Age, and whether someone survived from the train data.
 
@@ -101,6 +114,7 @@ ggplot(cleaned_train, aes(x = Sex))+
 
 
 Here is a graph for Passenger Class.
+
 ```{R Barplot Pclass}
 ggplot(cleaned_train, aes(x = Pclass))+ 
   geom_bar(fill = "steelblue") + 
@@ -132,15 +146,65 @@ A couple points from the first 4 graphs:
 
 ## **Next lets see even more Analysis**
 
+
 ```{R Barplot S/F}
 ggplot(cleaned_train, aes(x = Survived, fill = Sex))+ 
  geom_bar() + 
   geom_text(aes(label = ..count..), stat = "count", hjust = 1, vjust = 1.5, color = "white", position = "stack")+
   labs("text", title = "Survivability by Gender", subtitle = "0 = Did not Survive | 1 = Survived")
 ```
-```{R Barplot S/P}
-ggplot(cleaned_train, aes(x = Survived, fill = Pclass))+ 
- geom_bar() + 
-  geom_text(aes(label = ..count..), stat = "count", hjust = 1, vjust = 1.5, color = "white", position = "stack")+
-  labs("text", title = "Survivability by Passenger Class", subtitle = "0 = Did not Survive | 1 = Survived")
+
+
+## **Decision Tree**
+We will see try to predict the survival rate of the passenger by Sex, Age, and Passenger Class. Lets take a look at our data again. 
+
+
+
+```{R cleaaan}
+cleaned_train
 ```
+
+Lets look at a decision tree.
+
+
+```{R Decision Tree}
+#install.packages("tree")
+library(tree)
+dec_tree <- tree(Survived ~ Sex + Pclass + Age, data = cleaned_train)
+
+print(dec_tree)
+```
+```{R summary_tree}
+plot(dec_tree)
+text(dec_tree, pretty = 1)
+#female is 0
+#male is 1
+```
+
+
+```{R hh}
+logistic_1 <- glm(Survived ~ Sex + Pclass + Age, family = 'binomial', data = cleaned_train)
+
+summary(logistic_1)
+```
+
+```{R}
+cleaned_train$Survival_Rate <- predict(logistic_1, newdata = cleaned_train, type = "response")
+cleaned_train
+```
+
+```{R}
+cleaned_train <- cleaned_train %>% mutate(L_Survived = ifelse(Survival_Rate > .50, 1,0))
+
+head(cleaned_train)
+```
+### **Problem & Answer**
+* What were the highest chances of survival rate on the Titanic based on Passenger Class, Age and Sex?
+    * Based on our analysis, the survival rate was the highest for the first passenger class, the youngest peple
+      and people who were females.
+    
+* Is age also the factor affecting the titanic survival rate?
+    * Yes age is a main factor in the titanic. Those who were younger were most likely to survive.
+    
+* What is the possible survival rate of a 20 year old man in the first passenger class?
+    * Based on our decision tree, the survival rate of a 20 year old man in 1st class is aproximately 45.4%.
