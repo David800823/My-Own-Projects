@@ -42,7 +42,7 @@ library(janitor)
 library(skimr)
 library(here)
 
-train <- read_csv("C:/Users/Sierr/Desktop/My Own Projects/My-Own-Projects/Project/Titanic/Dataset/train.csv")
+train <- read_csv("Dataset/train.csv")
 ```
 
 Lets look at the first 6 rows of data for train dataset
@@ -73,7 +73,9 @@ Our analysis is based on the following columns:
 * Sex
 
 The other columns we will drop.
-```{R drop columns}
+```{R drop columns & save to csv for Tableau}
+
+write.csv(train, "train_clean.csv", row.names=FALSE)
 keep_columns = c("PassengerId", "Survived", "Pclass", "Age", "Sex")
 
 cleaned_train <- train[keep_columns]
@@ -208,3 +210,7 @@ head(cleaned_train)
     
 * What is the possible survival rate of a 20 year old man in the first passenger class?
     * Based on our decision tree, the survival rate of a 20 year old man in 1st class is aproximately 45.4%.
+    
+    
+## **Check out the link below for Tableau charts**
+Click [Here!](https://public.tableau.com/app/profile/david.sierra.perez8682/viz/Titanic_16897474016460/PercentSurvivedBasedonPassengerClass#1)

@@ -13,7 +13,8 @@ library(dplyr)
 library(janitor)
 library(skimr)
 library(here)
-train <- read_csv("C:/Users/Sierr/Desktop/My Own Projects/My-Own-Projects/Project/Titanic/Dataset/train.csv")
+
+train <- read_csv("Dataset/train.csv")
 
 head(train)
 
