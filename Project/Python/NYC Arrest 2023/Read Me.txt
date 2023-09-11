@@ -1,5 +1,0 @@
-The NYPD is the largest police department in the United States with over 36,000 officers and 19,000 civilian employees.
-The following data collects every arrest in NYC by the NYPD during the current year. 
-The data is collected every quarter. 
-
-This repository has the following documents to create a datawarehouse.
