@@ -1,0 +1,4 @@
+Colors for NYC Arrest
+Navy Blue = 1c305c = Background
+Yellow = FEDE00 = Lines
+White = 00000 = Letters
