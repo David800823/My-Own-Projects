@@ -1,4 +1,4 @@
-# Welcome to my portfolio.
+# Welcome to My Portfolio.
 I am an aspiring data analyst passionate about data.<br>
 In this repository, you can see my work regarding Excel, SQL, Python, and R.<br>
 
