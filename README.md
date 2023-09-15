@@ -1,8 +1,6 @@
-# My-Own-Projects
+# Welcome to my portfolio.
+I am an aspiring data analyst passionate about data.<br>
+In this repository, you can see my work regarding Excel, SQL, Python, and R.<br>
 
-Welcome to my portfolio.
-I am an aspiring data analyst passionate about data. 
-In this repository, you can see my work regarding Excel, SQL, Python, and R. 
-
-Moreover, I also have a Tableau Public Account. 
+Moreover, I also have a Tableau Public Account.<br> 
 https://public.tableau.com/app/profile/david.sierra.perez8682
