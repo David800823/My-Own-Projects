@@ -1,0 +1,11 @@
+Hi all,
+
+Here is my US economic Data.
+In this folder, you will find some files. 
+1) CPI_all_values.csv - is a CSV from the Python script
+2) Inflation_Analysis.ipynb - is a jupyter notebook that contains a script retrieving data from the Federal Reserve Economic Dataset.
+
+Please feel free to look at my tableau public.
+https://public.tableau.com/app/profile/david.sierra.perez8682/viz/Inflation_17133116672800/Inflationintro
+
+I created some visuals from the data I web-scraped.
